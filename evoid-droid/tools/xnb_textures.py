@@ -126,7 +126,8 @@ def main() -> None:
     for index, name in enumerate(read_manifest(extracted)):
         if not name.endswith(".xnb") or "/Effects/" in name or name.startswith("Content/Models/") and ".fbm/" not in name:
             continue
-        rel = Path(name.removeprefix("Content/")).with_suffix("")
+        # lowercase: static hosts are case-sensitive, and the C# mixes "Textures"/"textures"
+        rel = Path(name.removeprefix("Content/").lower()).with_suffix("")
         try:
             print(f"{index:3} {name}: {convert(extracted / str(index), out / rel)}")
         except ValueError as e:

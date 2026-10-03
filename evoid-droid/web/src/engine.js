@@ -73,12 +73,13 @@ export class Context {
     });
   }
 
+  /** Asset files are all lowercase (static hosts like GitHub Pages are case-sensitive). */
   async loadTexture(name, { repeat = false } = {}) {
     if (!name) {
       return null;
     }
     if (!this.textures.has(name)) {
-      this.textures.set(name, this.textureLoader.loadAsync(`${ASSETS}textures/${name}.png`).then((tex) => {
+      this.textures.set(name, this.textureLoader.loadAsync(`${ASSETS}textures/${name.toLowerCase()}.png`).then((tex) => {
         tex.colorSpace = THREE.NoColorSpace;
         if (repeat) {
           tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
