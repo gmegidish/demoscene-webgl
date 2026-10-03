@@ -2,7 +2,13 @@
 
 A browser port of *Evoid Droid*, an Xbox 360 demo released as an XNA Creators Club package (`.ccgame`).
 
-**Credits (original):** graphics by am and snarling · music by gloom and flipside · code by kmk, krav and svok.
+On Pouët: [Evoid Droid by Excess & Process](https://www.pouet.net/prod.php?which=31587)
+
+**Credits**
+- [gloom](https://www.pouet.net/user.php?who=1265): graphics, music
+- [svok](https://www.pouet.net/user.php?who=998): code
+- In-demo credits: graphics by am and snarling · music by gloom and flipside · code by kmk, krav and svok
+
 All visuals, models and music belong to their authors; this folder only re-hosts them in browser-friendly formats.
 
 ## Run
