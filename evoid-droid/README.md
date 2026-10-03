@@ -1,8 +1,8 @@
-# Evoid Droid — Excess & Process (2007)
+# Evoid Droid — Excess & Portal Process (2007)
 
 A browser port of *Evoid Droid*, an Xbox 360 demo released as an XNA Creators Club package (`.ccgame`).
 
-On Pouët: [Evoid Droid by Excess & Process](https://www.pouet.net/prod.php?which=31587)
+On Pouët: [Evoid Droid](https://www.pouet.net/prod.php?which=31587) by [Excess](https://www.pouet.net/groups.php?which=1360) & [Portal Process](https://www.pouet.net/groups.php?which=3466)
 
 **Credits**
 - [gloom](https://www.pouet.net/user.php?who=1265): graphics, music

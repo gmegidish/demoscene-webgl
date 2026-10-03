@@ -4,7 +4,7 @@ Classic demoscene productions, reverse-engineered from their original binaries a
 
 | Demo | Group | Year | Platform | Pouët |
 |---|---|---|---|---|
-| [Evoid Droid](https://gmegidish.github.io/demoscene-webgl/evoid-droid/web/) | Excess & Process | 2007 | Xbox 360 (XNA) | [prod 31587](https://www.pouet.net/prod.php?which=31587) |
+| [Evoid Droid](https://gmegidish.github.io/demoscene-webgl/evoid-droid/web/) | [Excess](https://www.pouet.net/groups.php?which=1360) & [Portal Process](https://www.pouet.net/groups.php?which=3466) | 2007 | Xbox 360 (XNA) | [prod 31587](https://www.pouet.net/prod.php?which=31587) |
 
 Each demo lives in its own self-contained folder. Serve the repo root with any static server, or view it on GitHub Pages.
 
