@@ -4,7 +4,7 @@ Classic demoscene productions, reverse-engineered from their original binaries a
 
 | Demo | Group | Year | Platform |
 |---|---|---|---|
-| [Evoid Droid](evoid-droid/) | Excess & Process | 2007 | Xbox 360 (XNA) |
+| [Evoid Droid](https://gmegidish.github.io/demoscene-webgl/evoid-droid/web/) | Excess & Process | 2007 | Xbox 360 (XNA) |
 
 Each demo lives in its own self-contained folder. Serve the repo root with any static server, or view it on GitHub Pages.
 
