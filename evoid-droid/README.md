@@ -19,7 +19,7 @@ python3 -m http.server 8000
 # open http://localhost:8000/evoid-droid/web/
 ```
 
-Controls: click to start · Space pause · ←/→ seek 5 s · H shows time · `#t=42` starts at 42 s.
+Controls: click to start · Space pause · ←/→ seek 5 s · F fullscreen · H shows time · `#t=42` starts at 42 s.
 
 ## How it was ported
 

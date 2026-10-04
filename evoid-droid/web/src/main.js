@@ -74,6 +74,14 @@ function startTimeFromHash() {
   return match ? Number(match[1]) : 0;
 }
 
+function toggleFullscreen() {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    document.documentElement.requestFullscreen().catch(() => {});
+  }
+}
+
 function seek(deltaMs) {
   audio.currentTime = Math.max(0, audio.currentTime + deltaMs / 1000);
 }
@@ -91,6 +99,8 @@ window.addEventListener('keydown', (e) => {
     seek(-SEEK_STEP_MS);
   } else if (e.code === 'KeyH') {
     hud.hidden = !hud.hidden;
+  } else if (e.code === 'KeyF') {
+    toggleFullscreen();
   }
 });
 
