@@ -10,7 +10,10 @@ import {
   FLOOR_VS, FLOOR_FS, BASIC_VS, BASIC_FS,
 } from './metal/shaders.js';
 
-const SIM_HZ = 60; // updateBoids() ran once per frame on a 60 Hz Xbox 360
+// updateBoids() ran once per rendered frame, and this scene (O(n^2) flock, 2x300 sphere passes,
+// 5 blurs) ran at ~30 fps on the Xbox. At 60 steps/s the flock outruns the attractor's 5.4-unit
+// orbit and leaves the letters; at 30 it sloshes through E-x-P as in the original video.
+const SIM_HZ = 30;
 const SPHERE_RADIUS = 0.24;
 const SPHERE_SLICES = 8;
 const SPHERE_SECTORS = 16;

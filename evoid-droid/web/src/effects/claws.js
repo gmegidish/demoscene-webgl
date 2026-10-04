@@ -163,13 +163,6 @@ function scaled(points, k) {
   return points.map(([x, y, z]) => [x * k, y * k, z * k]);
 }
 
-/** TextureEnabled with no texture bound: D3D samples zero, leaving only specular highlights. */
-function blackTexture() {
-  const tex = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
-  tex.needsUpdate = true;
-  return tex;
-}
-
 function rotationZ(angle) {
   return new THREE.Matrix4().makeRotationZ(angle);
 }
@@ -188,11 +181,16 @@ class ClawsEffect extends DemoEffect {
 
     this.scene = new THREE.Scene();
     this.meshes = [];
-    const black = blackTexture();
+    // Untextured parts still draw with TextureEnabled = true and a null texture, which leaves the
+    // sampler bound to the previous part's texture, so in draw order they inherit it.
+    let boundTexture = null;
     for (const mesh of this.model.meshes) {
       for (const part of mesh.parts) {
         const textureName = materialTextureName('claws2', part.material);
-        const texture = textureName ? await this.ctx.loadTexture(textureName, { repeat: true }) : black;
+        if (textureName) {
+          boundTexture = await this.ctx.loadTexture(textureName, { repeat: true });
+        }
+        const texture = boundTexture;
         // XNA CullCounterClockwiseFace; the model's outward faces wind clockwise, i.e. GL back faces.
         const object = new THREE.Mesh(part.geometry, createBasicEffectMaterial(part.material, texture, THREE.BackSide));
         object.matrixAutoUpdate = false;

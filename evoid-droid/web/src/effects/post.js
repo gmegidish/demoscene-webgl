@@ -251,10 +251,13 @@ const CHANGE_IMAGE_FS = /* glsl */ `
   void main() {
     vec4 to = texture2D(toMap, vUv);
     if (technique == 1) {
-      // ZoomFrom samples the old frame with a point sampler: blocky pixelation into the new image.
-      float block = 1.0 + floor(fT * fT * 96.0);
-      vec2 px = (floor(vUv * fRTDimensions / block) + 0.5) * block / fRTDimensions;
-      gl_FragColor = mix(texture2D(fromMap, px), to, fT * fT);
+      // ZoomFrom: zoom into the old frame (point-sampled, per fromMapPoint) about the centre.
+      // Scale 1.1 - fT comes from the shader's literal pool (0.5, 1.1, +-1); the new image only
+      // shows where the zoomed lookup leaves the frame, i.e. a thin border while fT < 0.1.
+      vec2 src = 0.5 + (vUv - 0.5) * (1.1 - fT);
+      vec2 px = (floor(src * fRTDimensions) + 0.5) / fRTDimensions;
+      bool inside = all(greaterThanEqual(src, vec2(0.0))) && all(lessThanEqual(src, vec2(1.0)));
+      gl_FragColor = inside ? texture2D(fromMap, px) : to;
     } else if (technique == 2) {
       vec2 zoomed = 0.5 + (vUv - 0.5) * (1.0 - 0.5 * (1.0 - fT));
       gl_FragColor = mix(texture2D(fromMap, vUv), texture2D(toMap, zoomed), fT);

@@ -290,9 +290,12 @@ class LiquidEffect extends DemoEffect {
 
   updateParticleMatrices() {
     const m = new THREE.Matrix4();
-    const p = this.physics.position;
+    const { position: p, particleRadius } = this.physics;
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      m.makeScale(PARTICLE_RADIUS, PARTICLE_RADIUS, PARTICLE_RADIUS).setPosition(p[i * 3], p[i * 3 + 1], p[i * 3 + 2]);
+      // Draw at the collision radius (0.08–0.1), not a flat 0.1: the glass keeps centres within
+      // 1.5 - r, so a flat 0.1 pokes the smaller particles up to 0.02 past the glass.
+      const r = particleRadius[i];
+      m.makeScale(r, r, r).setPosition(p[i * 3], p[i * 3 + 1], p[i * 3 + 2]);
       this.particles.setMatrixAt(i, m);
     }
     this.particles.instanceMatrix.needsUpdate = true;
