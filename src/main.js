@@ -1,16 +1,31 @@
 // Boot: build effects in the original registration order, load assets, then drive the timeline from the music clock.
-import { Context, Timeline, PendingEffect } from './engine.js';
+import * as THREE from 'three';
+import { Context, Timeline, PendingEffect, loadFile } from './engine.js';
 import { EFFECT_ORDER, buildEvents } from './demoTimeline.js';
 import { SplineEffect } from './effects/splines.js';
 import { GlowEffect, FlashEffect, ImageEffect, ChangeImageEffect } from './effects/post.js';
 
 const SEEK_STEP_MS = 5000;
-const MUSIC_URL = '../assets/audio/music.mp3';
+const MUSIC_URL = 'assets/audio/music.mp3';
 
 const ctx = new Context(document.getElementById('screen'));
 const audio = document.getElementById('music');
 const overlay = document.getElementById('start');
 const hud = document.getElementById('hud');
+const status = document.getElementById('status');
+const progress = document.getElementById('progress');
+const progressFill = document.getElementById('progress-fill');
+
+// Every texture, model, font and the music go through three's default LoadingManager.
+// Items register as loading discovers them, so the total grows; never let the bar move backwards.
+let shownProgress = 0;
+THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
+  shownProgress = Math.max(shownProgress, loaded / total);
+  const percent = Math.floor(shownProgress * 100);
+  status.textContent = `loading ${percent}%`;
+  progress.setAttribute('aria-valuenow', String(percent));
+  progressFill.style.transform = `scaleX(${shownProgress})`;
+};
 
 const ported = {
   splines: () => new SplineEffect(ctx),
@@ -104,14 +119,14 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-overlay.textContent = 'loading…';
 try {
   // Blob URL keeps seeking working on static servers without HTTP range support.
-  const [music] = await Promise.all([fetch(MUSIC_URL).then((r) => r.blob()), timeline.load()]);
+  const [music] = await Promise.all([loadFile(MUSIC_URL, 'blob'), timeline.load()]);
   audio.src = URL.createObjectURL(music);
   warmUpShaders();
   timeline.reset(); // Demo.LoadGraphicsContent resets the timeline after loading
-  overlay.textContent = 'click to start';
+  status.textContent = 'click to start';
+  progress.remove();
   overlay.addEventListener('click', async () => {
     overlay.remove();
     audio.currentTime = startTimeFromHash();
@@ -119,7 +134,7 @@ try {
     requestAnimationFrame(frame);
   }, { once: true });
 } catch (error) {
-  overlay.textContent = `failed to load: ${error.message}`;
+  status.textContent = `failed to load: ${error.message}`;
   throw error;
 }
 

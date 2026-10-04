@@ -4,8 +4,9 @@
 // column-major array ARE the equivalent three.js (column-vector) matrix, so Matrix4.fromArray() needs
 // no transpose. XNA `A * B` (apply A, then B) becomes `new Matrix4().multiplyMatrices(B, A)`.
 import * as THREE from 'three';
+import { loadFile } from './engine.js';
 
-const ASSETS = '../assets/';
+const ASSETS = 'assets/';
 
 /** XNA `a * b`: transform by a, then by b. */
 export function xnaMul(a, b) {
@@ -43,8 +44,8 @@ const ATTRIBUTE_NAMES = {
  */
 export async function loadModel(name) {
   const [json, bin] = await Promise.all([
-    fetch(`${ASSETS}models/${name}.json`).then((r) => r.json()),
-    fetch(`${ASSETS}models/${name}.bin`).then((r) => r.arrayBuffer()),
+    loadFile(`${ASSETS}models/${name}.json`, 'json'),
+    loadFile(`${ASSETS}models/${name}.bin`, 'arraybuffer'),
   ]);
   const bones = json.bones.map((b) => ({ name: b.name, parent: b.parent, transform: new THREE.Matrix4().fromArray(b.transform) }));
   const meshes = json.meshes.map((mesh) => ({

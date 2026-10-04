@@ -323,7 +323,7 @@ class BeeEffect extends DemoEffect {
     const ctx = this.ctx;
     this.vsm = getVSM(ctx);
     this.random = new MathRandom();
-    const loader = new THREE.CubeTextureLoader().setPath('../assets/textures/textures/');
+    const loader = new THREE.CubeTextureLoader().setPath('assets/textures/textures/');
     const [bump, skybox, bee] = await Promise.all([
       ctx.loadTexture('textures/CubeNormals', { repeat: true }),
       loader.loadAsync(['skybox_px.png', 'skybox_nx.png', 'skybox_py.png', 'skybox_ny.png', 'skybox_pz.png', 'skybox_nz.png']),

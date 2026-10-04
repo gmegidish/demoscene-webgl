@@ -305,7 +305,7 @@ function createHeightTarget(ctx) {
 }
 
 async function loadCubeTexture(name) {
-  const urls = SKY_FACES.map((face) => `../assets/textures/textures/${name}_${face}.png`);
+  const urls = SKY_FACES.map((face) => `assets/textures/textures/${name}_${face}.png`);
   const texture = await new THREE.CubeTextureLoader().loadAsync(urls);
   texture.colorSpace = THREE.NoColorSpace;
   return texture;

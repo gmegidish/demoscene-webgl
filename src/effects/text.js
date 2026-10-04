@@ -2,7 +2,7 @@
 // swap back into place one at a time (every swapSpeed ms), each swap animated with a smoothstep
 // slide and a catmull-rom "pop" in scale. Glyphs come from the rns_serial SpriteFont.
 import * as THREE from 'three';
-import { DemoEffect, WIDTH, HEIGHT } from '../engine.js';
+import { DemoEffect, WIDTH, HEIGHT, loadFile } from '../engine.js';
 import { DotNetRandom } from '../dotnetRandom.js';
 
 const FONT = 'rns_serial';
@@ -36,7 +36,7 @@ function swap(arr, i, j) {
 class TextEffect extends DemoEffect {
   async load() {
     const [font, sheet] = await Promise.all([
-      fetch(`../assets/fonts/${FONT}.json`).then((r) => r.json()),
+      loadFile(`assets/fonts/${FONT}.json`, 'json'),
       this.ctx.loadTexture(FONT),
     ]);
     this.font = font;

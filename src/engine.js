@@ -3,7 +3,15 @@ import * as THREE from 'three';
 
 export const WIDTH = 1280;
 export const HEIGHT = 720;
-const ASSETS = '../assets/';
+const ASSETS = 'assets/';
+
+/**
+ * Fetch through three.js's default LoadingManager, so the loading bar counts it with the textures.
+ * @param {'json'|'arraybuffer'|'blob'} responseType
+ */
+export function loadFile(url, responseType) {
+  return new THREE.FileLoader().setResponseType(responseType).loadAsync(url);
+}
 
 export function clamp01(x) {
   return Math.min(1, Math.max(0, x));

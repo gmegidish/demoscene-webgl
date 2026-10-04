@@ -66,7 +66,7 @@ function buildFloorGeometry() {
 
 function loadCubeTexture(name) {
   const loader = new THREE.CubeTextureLoader();
-  return loader.loadAsync(CUBE_FACES.map((f) => `../assets/textures/textures/${name}_${f}.png`)).then((tex) => {
+  return loader.loadAsync(CUBE_FACES.map((f) => `assets/textures/textures/${name}_${f}.png`)).then((tex) => {
     tex.colorSpace = THREE.NoColorSpace;
     return tex;
   });
