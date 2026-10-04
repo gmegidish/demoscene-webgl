@@ -6,6 +6,8 @@
 
 That platform is gone. The Creators Club closed, and the demo only exists as a 25 MB `.ccgame` file. This repository takes that file apart and rebuilds the demo in a browser, with Three.js. Same timeline, same music, same random seeds.
 
+The whole port was reverse engineered by [Claude Code](https://claude.com/claude-code): unpacking the package, decompiling the code, converting every asset, and rewriting every scene and shader. This README was written by Claude Code too.
+
 | | |
 |---|---|
 | ![Intro: growing splines and the Evoid Droid logo](docs/screenshots/01-intro.jpg) | ![Claws: the machine, with credits](docs/screenshots/02-claws.jpg) |
@@ -28,11 +30,19 @@ Add `#t=42` to the URL to start at 42 s.
 
 ## Credits
 
-- [gloom](https://www.pouet.net/user.php?who=1265): graphics, music
-- [svok](https://www.pouet.net/user.php?who=998): code
-- In-demo credits: graphics by am and snarling · music by gloom and flipside · code by kmk, krav and svok
+*Evoid Droid* by [Excess](https://www.pouet.net/groups.php?which=1360) & [Portal Process](https://www.pouet.net/groups.php?which=3466), Xbox 360, August 2007. [Pouët entry](https://www.pouet.net/prod.php?which=31587).
+
+| Role | Authors |
+|---|---|
+| Code | [svok](https://www.pouet.net/user.php?who=998), kmk, krav |
+| Graphics | [gloom](https://www.pouet.net/user.php?who=1265), am, snarling |
+| Music | [gloom](https://www.pouet.net/user.php?who=1265), flipside |
+
+Linked names are the ones credited on Pouët. The others come from the credits shown in the demo itself.
 
 All visuals, models and music belong to their authors. This repository only re-hosts them in formats a browser can read.
+
+The port, the asset converters and this README: reverse engineered and written by [Claude Code](https://claude.com/claude-code).
 
 ---
 
